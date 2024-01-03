@@ -1,0 +1,27 @@
+#{extends 'main.html' /}
+#{set title:'📋 Listagem de Pedidos 📋' /}
+<hr>
+<h2 style="text-align: center;">#{get 'title' /}</h2>
+<hr>
+
+#{list items:pedidos, as:'p'}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Pedido ${p.id}</h5>
+            <p class="card-text"><b>Data:</b> ${p.data}</p>
+            <p class="card-text"><b>Local de Entrega:</b> ${p.entregaPedido}</p>
+            <p class="card-text"><b>Forma de pagamento:</b> ${p.formaPagamento}</p>
+            <p class="card-text"><b>Cliente:</b> ${p.cliente.nome}</p>
+		    <p class="card-text"><b>Brownies:</b> ${p.itens}</p>
+			
+
+            <!-- Botões de Editar e Remover -->
+            <div class="mt-3">
+                <a href="@{Pedidos.editar(p.id)}" class="btn btn-primary me-2">Editar</a>
+                <a href="@{Pedidos.remover(p.id)}" class="btn btn-danger">Remover</a>
+            </div>
+        </div>
+    </div>
+    <br />
+#{/list}
+

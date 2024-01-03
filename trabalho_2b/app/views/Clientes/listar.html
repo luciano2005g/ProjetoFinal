@@ -1,0 +1,72 @@
+#{extends 'main.html' /}
+#{set title:'🍓Listagem de Clientes🍓' /}
+<hr>
+<form>
+    <div class="row">
+        <div class="col-9">
+            <input class="form-control" type="text"
+                name="termo" value="${termo}" placeholder="Informe o termo de busca" />
+        </div>
+        <div class="col-3">
+            <input style="background-color: fuchsia;" type="submit" class="btn btn-primary mb-3" value="Buscar" />
+        </div>
+    </div>
+</form>
+
+
+
+<hr>
+<h2 style="text-align: center;">#{get 'title' /}</h2>
+<hr>
+
+<div id="resultado">
+	#{list items:clientes, as:'c'}
+	    <div class="card">
+	        <div class="card-body">
+	            <h5 id="nome" class="card-title">${c.nome}</h5>
+	            <p  class="card-text"><b>Email:</b> ${c.email}</p>
+	            <p class="card-text"><b>Endereço:</b> ${c.endereco}</p>
+	            
+	
+	            <a href="@{Clientes.remover(c.id)}" class="btn btn-danger">Remover</a>
+	            <a href="@{Clientes.editar(c.id)}" class="btn btn-primary">Editar</a>
+	        </div>
+	    </div>
+	    <br />
+	#{/list}
+</div>
+
+
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$("form").submit(function(e) {
+	 e.preventDefault();
+	 $.ajax({
+		 type: "GET", //INFORME O TIPO DA REQUISICAO
+		 url: "@{Clientes.listaAjax}", //INFORME A URL DE DESTINO
+		 data: $(this).serialize(), //ENVIA DADOS DO FORMULARIO
+		 success: function(data) {
+			 $("#resultado").empty();
+			 $.each(data, function(i, item) {
+				 $("#resultado").append(
+						 '<div class="card">' +
+                         '<div class="card-body">' +
+                             '<h5 class="card-title">' + item.nome + '</h5>' +
+                             '<p class="card-text"><b>Email:</b>' + item.email + '</p>' +
+                             '<p class="card-text"><b>Endereço:</b>' + item.endereco + '</p>' +
+                         '</div>' +
+                     '</div>' +
+                     '<br />'
+                     +
+    				 ' <a class="btn btn-danger" href=/clientes/editar?id='+ item.id +'>Editar</a>' +
+    				 ' <a class="btn btn-danger" href=/clientes/remover?id='+ item.id +'>Remover</a></li>'
+				    );
+			 });
+		 }
+	 });
+	});
+});
+</script>
+

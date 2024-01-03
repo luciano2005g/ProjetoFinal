@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title:'🍓Listagem de Pedidos🍓' /}
+
+<h2 style="text-align: center;">#{get 'title' /}</h2>
+<hr>
+#{list items:pedidos, as:'p'}
+	<h2>${p.id}</h2>
+	
+	<p><b>Cliente:</b> ${p.cliente?.nome}</p>
+	<p><b>Tipo de pedidos:</b> ${p.tipoPedidos}</p>
+	<p><b>Local de entrega:</b> ${p.entregaPedido}</p>
+	<p><b>Data do pedido: </b>${p.data}</p>
+	<p><b>Forma de pagamento: </b>${p.formaPagamento}</p>
+	
+	<td><a href="@{Pedidos.remover(p.id)}"> Cancelar Pedido</a></td> 
+	
+	<hr />
+	 
+	 
+#{/list}

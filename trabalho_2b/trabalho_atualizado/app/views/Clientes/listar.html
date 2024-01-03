@@ -1,0 +1,36 @@
+#{extends 'main.html' /}
+#{set title:'🍓Listagem de Clientes🍓' /}
+<hr>
+<form action="@{Clientes.listar}" method="GET">
+	<div class="row">
+		<div class="col-9">
+			<input class="form-control" type="text"
+				name="termo" value="${termo}" placeholder="Informe o termo de busca" />
+		</div>
+		<div class="col-3">
+			<input style="background-color: fuchsia;" type="submit" class="btn btn-primary mb-3" value="Buscar" />
+		</div>
+	</div>
+</form>
+<hr>
+<h2 style="text-align: center;">#{get 'title' /}</h2>
+<hr>
+
+#{list items:clientes, as:'c'}
+	
+	<h2>${c.id}</h2>
+	
+	<p><b>Nome:</b>: ${c.nome}</p>
+	<p><b>Email:</b> ${c.email}</p>
+	<p><b>Endereço: </b>${c.endereco}</p>
+	<p><b>Perfil: </b>${c.perfil}</p>
+	<p><b>Senha: </b> ${c.senha}</p>
+	
+	<td><a href="@{Clientes.remover(c.id)}"> Remover</a></td> 
+	<td><a href="@{Clientes.editar(c.id)}">Editar</a></td>
+	
+	<hr />
+	 
+	 
+#{/list}
+

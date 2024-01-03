@@ -1,0 +1,94 @@
+#{extends 'main.html' /} #{set title:'🍓Faça seu Pedido🍓' /}
+
+<div>
+	<form action="@{Pedidos.salvar}" method="POST">
+		<h2 style="text-align: center;">#{get 'title' /}</h2>
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<label><b>Tipo de Brownies:</b></label>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="p.tipoPedidos"
+					value="morango" id="flexCheckDefault"> <label
+					class="form-check-label" for="flexCheckDefault"> Morango🍓
+					R$5,00 </label>
+			</div>
+
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="p.tipoPedidos"
+					value="chocolate" id="flexCheckChecked"> <label
+					class="form-check-label" for="flexCheckChecked">
+					Chocolate🍫 R$5,00 </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="p.tipoPedidos"
+					value="ninho" id="flexCheckChecked"> <label
+					class="form-check-label" for="flexCheckChecked"> Ninho🍥
+					R$5,00 </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" name="p.tipoPedidos"
+					value="Doce de Leite" id="flexCheckChecked"> <label
+					class="form-check-label" for="flexCheckChecked"> Doce de
+					Leite🍯 R$5,00 </label>
+			</div>
+		</div>
+
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label"><b>Endereço
+						de Entrega:</b></label> <input type="text" name="p.entregaPedido"
+					value="${p?.entregaPedido}" class="form-control"
+					id="exampleFormControlInput1">
+			</div>
+		</div>
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<div class="mb-3">
+				<label><b>Data de entrega:</b></label> <input type="date"
+					name="p.data" value="${p?.data}" class="form-control"
+					id="exampleFormControlInput1" />
+			</div>
+		</div>
+
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<label><b>Tipo de Pagamento:</b></label>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="p.formaPagamento"
+					id="flexRadioDefault1" value="cartao"> <label
+					class="form-check-label" for="flexRadioDefault1"> cartão </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="p.formaPagamento"
+					id="flexRadioDefault1" value="pix"> <label
+					class="form-check-label" for="flexRadioDefault1"> Pix </label>
+			</div>
+			<div class="form-check">
+				<input class="form-check-input" type="radio" name="p.formaPagamento"
+					id="flexRadioDefault2" value="especie" checked> <label
+					class="form-check-label" for="flexRadioDefault2"> Espécie </label>
+			</div>
+		</div>
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<label><b>Clientes:</b></label> <select class="form-select"
+				aria-label="Default select example" name="p.cliente.id">
+				<option selected>Selecione um cliente</option> #{list
+				items:clientes, as:'c'}
+				<option value="${c.id}">${c.nome}</option> #{/list}
+			</select>
+		</div>
+		<hr>
+
+		<input style="background-color: #eb8d96; border-color: black;"
+			class="form-control" class="btn btn-primary" type="submit"
+			value="🍓Cadastrar🍓" />
+
+	</form>
+</div>

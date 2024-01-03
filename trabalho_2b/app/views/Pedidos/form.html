@@ -1,0 +1,128 @@
+#{extends 'main.html' /} #{set title:'🍓Faça seu Pedido🍓' /}
+<div>
+	<form action="@{Pedidos.salvar}" method="POST">
+		<h2 style="text-align: center;">#{get 'title' /}</h2>
+
+<div class="card" style="background-color: #eb8d96; border-color: black;">
+    <div class="card-body">
+        <h5 class="card-title"><b>Selecione o Brownie(s):</b></h5>
+        <hr>
+
+        <ul class="list-group">
+            #{list items:itensCarrinho, as:'i'}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${i} ${i.preco}
+                    <span>
+                        <a href="@{Pedidos.addItem(i.id)}" class="btn btn-success btn-sm">Adicionar</a>
+                    </span>
+                </li>
+            #{/list} 
+        </ul>
+
+        <div class="mt-3">
+    <b>Adicionados:</b>
+    <ul class="list-group">
+        
+        #{list items:itens, as:'i'}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>${i.nome}</span>
+                <span>${i.preco}</span>
+                
+                <span>
+                    <a href="@{Pedidos.removerItens(i.id)}" class="btn btn-danger btn-sm">Remover</a>
+                </span>
+            </li>
+        #{/list}
+      
+    </ul>
+    
+    <div class="mt-3">
+    </div>
+    <div id="totalContainer">
+    <!-- Aqui será exibido o valor total -->
+    <script>
+    function calcularTotal() {
+        $.ajax({
+            url: "@{Pedidos.calcularTotal}",
+            type: "GET",
+            success: function(response) {
+                var totalContainer = $("#totalContainer");
+                totalContainer.text("Total: R$ " + response.total.toFixed(2)); 
+            },
+            error: function(error) {
+                console.error("Erro ao calcular total: ", error);
+            }
+        });
+    }
+    calcularTotal();
+</script>
+    
+</div>
+<button type="button" class="btn btn-primary" onclick="calcularTotal()">Calcular Total</button>
+    
+</div>
+    </div>
+
+</div>
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<div class="mb-3">
+				<label for="exampleFormControlInput1" class="form-label"><b>Endereço
+						de Entrega:</b></label> <input type="text" name="p.entregaPedido"
+					value="${p?.entregaPedido}" class="form-control">
+			</div>
+			#{error 'pedido.entregaPedido' /}
+		</div>
+
+		<div class="form-control"
+			style="background-color: #eb8d96; border-color: black;">
+			<div class="mb-3">
+				<label><b>Data de Entrega:</b></label> <input type="date"
+					name="p.data" value="${p?.data}" class="form-control" />
+			</div>
+			#{error 'pedido.data' /}
+		</div>
+
+		<div class="card" style="background-color: #eb8d96; border-color: black;">
+    <div class="card-body">
+        <h5 class="card-title"><b>Tipo de Pagamento:</b></h5>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="p.formaPagamento" id="cartao" value="cartao">
+            <label class="form-check-label" for="cartao"> Cartão </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="p.formaPagamento" id="pix" value="pix">
+            <label class="form-check-label" for="pix"> Pix </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="p.formaPagamento" id="especie" value="especie" checked>
+            <label class="form-check-label" for="especie"> Espécie </label>
+        </div>
+    </div>
+    #{error 'pedido.formaPagamento' /}
+</div>
+		
+<div class="card" style="background-color: #eb8d96; border-color: black;">
+    <div class="card-body">
+        <h5 class="card-title"><b>Selecione o Cliente: </b></h5>
+        <ul class="list-group">
+            <select class="form-select"
+				aria-label="Default select example" name="p.cliente.id">
+				<option selected>Selecione um cliente</option> #{list
+				items:clientes, as:'c'}
+				<option value="${c.id}" >${c.nome}</option> #{/list}
+			</select>
+        </ul>
+    </div>
+</div>
+
+
+   
+<input style="background-color: #eb8d96; border-color: black;"
+    class="form-control btn btn-primary" type="submit" value="🍓Cadastrar🍓" />
+	</form>
+</div>

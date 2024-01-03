@@ -1,0 +1,31 @@
+
+#{extends 'main.html' /}
+#{set title:'Login' /}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Informe suas credenciais de login</h1>
+
+            <form action="@{Logins.logar}" method="POST" class="login-form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha:</label>
+                    <input type="password" class="form-control" id="senha" name="senha" required />
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Login</button>
+                
+            </form>
+<br>
+            #{if flash.error}
+                <div class="alert alert-danger mt-3" role="alert">
+                    ${flash.error}
+                </div>
+            #{/if}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+#{extends 'main.html' /}
+#{set title:'🍓Login🍓' /}
+
+	#{set title:'🍓Login🍓' /}
+
+
+<h2 style="text-align: center;">#{get 'title' /}</h2>
+
+<form action="@{Logins.logar}" method="POST">
+
+
+	
+	<div class="form-control" style="background-color: #eb8d96; border-color: black;">
+	<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label" ><b>Email:</b></label>
+    <input type="email" name="email" value="${email}" class="form-control" id="exampleFormControlInput1">
+    </div>
+    </div>
+
+	
+	<div class="form-control" style="background-color: #eb8d96; border-color: black;">
+<label for="inputPassword5" class="form-label"><b>Senha:</b></label>
+<input type="password" name="senha" value="${senha}" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+
+	
+	<br></div>
+	<hr/>
+	
+<input style="background-color: #eb8d96; border-color: black;" class="form-control" class="btn btn-primary" type="submit" value="🍓Entrar🍓" />
+	
+
+</form>

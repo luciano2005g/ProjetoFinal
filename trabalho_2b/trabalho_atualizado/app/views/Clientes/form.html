@@ -1,0 +1,60 @@
+#{extends 'main.html' /}
+#{set title:'🍓Cadastre-se🍓' /}
+
+#{if c}
+	#{set title:'🍓Edição de cliente🍓' /}
+#{/if}
+#{else}
+	#{set title:'🍓Cadastre-se🍓' /}
+#{/else}
+
+<h2 style="text-align: center;">#{get 'title' /}</h2>
+
+<form action="@{Clientes.salvar}" method="POST">
+
+	<input type="hidden" name="c.id" value="${c?.id}" />
+
+	<div class="form-control" style="background-color: #eb8d96; border-color: black;">
+	<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label" ><b>Nome:</b></label>
+    <input type="text" name="c.nome" value="${c?.nome}" class="form-control" id="exampleFormControlInput1">
+    </div>
+    </div>
+	
+	<div class="form-control" style="background-color: #eb8d96; border-color: black;">
+	<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label" ><b>Email:</b></label>
+    <input type="email" name="c.email" value="${c?.email}" class="form-control" id="exampleFormControlInput1">
+    </div>
+    </div>
+
+	<div class="form-control" style="background-color: #eb8d96; border-color: black;">
+	<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label" ><b>Endereço:</b></label>
+    <input type="text" name="c.endereco" value="${c?.endereco} " class="form-control" id="exampleFormControlInput1">
+    </div>
+    </div>
+    
+   <div class="form-control" style="background-color: #eb8d96; border-color: black;">
+	<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label" ><b>Perfil:</b></label>
+    <input type="text" name="c.perfil" value="${c?.perfil} " class="form-control" id="exampleFormControlInput1">
+    </div>
+    </div>
+  
+	
+	<div class="form-control" style="background-color: #eb8d96; border-color: black;">
+<label for="inputPassword5" class="form-label"><b>Senha:</b></label>
+<input type="password" name="c.senha" value="${c?.senha}" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+
+	
+	<br></div>
+	<hr/>
+	
+	#{if c}
+<input style="background-color: #eb8d96; border-color: black;" class="form-control" class="btn btn-primary" type="submit" value="🍓Atualizar🍓" />	#{/if}
+	#{else}
+		<input style="background-color: #eb8d96; border-color: black;" class="form-control" class="btn btn-primary" type="submit" value="🍓Cadastrar🍓" />
+	#{/else}
+
+</form>
